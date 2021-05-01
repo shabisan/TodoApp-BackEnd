@@ -117,7 +117,7 @@ def create_new_user():
         if data is None or data["email"] is None or data["password"] is None:
             e = Exception('data is missing!')
             response = {
-                "status": STATUS_FAILED,
+                "status": __STATUS_FAIL,
                 "timestamp": stamp(),
                 "reason": e.__str__()
             }
@@ -139,7 +139,7 @@ def create_new_user():
                 "timestamp": stamp()
             }
             resp = make_response(response)
-            resp.headers['Authorization'] = new_user.token.decode()
+            resp.headers['Authorization'] = new_user.token
             resp.status_code = 201
             return resp
         else:

@@ -5,7 +5,7 @@ from os.path import dirname, abspath
 
 current_dir = dirname(dirname(abspath(__file__)))
 
-engine = create_engine(f'sqlite:////{current_dir}/todo-tasks.db', convert_unicode=True)
+engine = create_engine(r'sqlite:///C:\Users\User1\workspace\TodoApp-BackEnd\todo-tasks.db', convert_unicode=True)
 db_session = scoped_session(sessionmaker(autocommit=False,
                                          autoflush=False,
                                          bind=engine))
