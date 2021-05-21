@@ -25,7 +25,7 @@ stamp = lambda: int(time().__str__()[:10])
 
 def get_jwt_decode_data():
     token = request.headers.get('Authorization')
-    session_data = jwt.decode(token, app.config['SECRET_KEY'])
+    session_data = jwt.decode(token, app.config['SECRET_KEY'], algorithms="HS256")
     return session_data
 
 
@@ -39,7 +39,7 @@ def check_for_token(func, header='Authorization'):
             resp.status_code = 403
             return resp
         try:
-            data = jwt.decode(token, app.config['SECRET_KEY'])
+            data = jwt.decode(token, app.config['SECRET_KEY'], algorithms="HS256")
             print(data)
         except:
             session['logged_in'] = False
@@ -203,7 +203,7 @@ def user_login():
                 "message": "Login Successfully!",
             }
             resp = make_response(response)
-            resp.headers['Authorization'] = optional_user.token.decode()
+            resp.headers['Authorization'] = optional_user.token
             resp.status_code = 200
             return resp
         else:
